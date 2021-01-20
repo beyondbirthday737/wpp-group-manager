@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer')
 const QRcodeGen = require('qrcode-terminal')
-const contactsNumbers = require('./contacts.json')
+const contactsNumbersJson = require('./contacts.json')
+
+const contactsNumbers = [...contactsNumbersJson.contactsNumbers]
 
 async function wppbot(){
     const browser = await puppeteer.launch({executablePath: '/usr/bin/google-chrome', headless: false})
@@ -32,8 +34,8 @@ async function wppbot(){
     await page.waitForSelector('._2XSjg')
     await page.click('._1C6Zl')
     
-    for(let i = 0; i <= contactsNumbers.contactsNumbers.length; i++){ 
-        await page.type('._1awRl', contactsNumbers.contactsNumbers[i])
+    for(let i = 0; i < contactsNumbers.length; i++){ 
+        await page.type('._1awRl', contactsNumbers[i])
         await delay(3000)
         await page.keyboard.press('Enter')
         await delay(3000)
@@ -41,7 +43,7 @@ async function wppbot(){
     
     await page.click('._3Git-')
     await delay(3000)
-    await page.click('._2XHG4')
+    await page.click('.gMRg5')
     
     
     async function getQRCode(){
